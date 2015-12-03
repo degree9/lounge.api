@@ -14,16 +14,15 @@
 
 
 (compojure/defroutes app-routes
-  (compojure/GET "/" req (hiccup/html [:head [:meta {:charset "utf-8"}]
-                                       (silicone/import-polymer "bower_components")]
+  (compojure/GET "/" req (hiccup/html [:head [:meta {:charset "utf-8"}] (silicone/import-polymer "bower_components")]
                                       [:body [:script {:type "text/javascript" :src "index.html.js"}]]))
   (route/resources "/" {:root ""}))
 
 (def app
   (-> app-routes
-        (castra/wrap-castra 'lounge.api.auth)
-        (castra/wrap-castra-session "a 16-byte secret")
-        (mwdefaults/wrap-defaults mwdefaults/api-defaults)))
+      (castra/wrap-castra 'lounge.api.auth)
+      (castra/wrap-castra-session "a 16-byte secret")
+      (mwdefaults/wrap-defaults mwdefaults/api-defaults)))
 
 (defn -main [& args]
   (let [port (or (Integer. (System/getenv "PORT")) 8080)]
