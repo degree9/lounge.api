@@ -1,6 +1,6 @@
 (ns lounge.api.auth
   (:require [lounge.api.core :as api]
-            [lounge.database.users :as users]
+            [lounge.db.users :as users]
             [castra.core :refer [defrpc ex *session*]]
             (cemerick.friend [credentials :as creds])))
 
